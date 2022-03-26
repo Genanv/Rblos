@@ -11,10 +11,10 @@ local Library = {
 		Default = {
 			Main = Color3.fromRGB(37, 35, 33),
 			Secondary = Color3.fromRGB(65, 63, 63),
-			Tertiary = Color3.fromRGB(0, 220, 220),
+			Tertiary = Color3.fromRGB(0, 166, 166),
 
 			StrongText = Color3.fromHSV(0, 0, 1),		
-			WeakText = Color3.fromHSV(182/360, 100, 44)
+			WeakText = Color3.fromRGB(0,84,84)
 		},
 		Vaporwave = {},
 		OperaGX = {},
