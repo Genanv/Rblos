@@ -11,7 +11,7 @@ local Library = {
 		Default = {
 			Main = Color3.fromRGB(37, 35, 33),
 			Secondary = Color3.fromRGB(65, 63, 63),
-			Tertiary = Color3.fromRGB(0, 230, 230),
+			Tertiary = Color3.fromRGB(237, 94, 38),
 
 			StrongText = Color3.fromHSV(0, 0, 1),		
 			WeakText = Color3.fromRGB(153, 153, 153)
