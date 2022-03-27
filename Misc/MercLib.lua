@@ -366,6 +366,10 @@ function Library:set_status(txt)
 	self.statusText.Text = txt
 end
 
+function Library:SetVersion(txt)
+	self.versionText.Text = txt
+end
+
 function Library:create(options)
 
 	local settings = {
@@ -616,6 +620,18 @@ function Library:create(options)
 		TextSize = 14,
 		TextXAlignment = Enum.TextXAlignment.Left
 	})
+	
+	local version = core:object("TextLabel", {
+		AnchorPoint = Vector2.new(0, 1),
+		BackgroundTransparency = 1,
+		Position = UDim2.new(1, 5, 1, -6),
+		Size = UDim2.new(0.2, 0, 0, 10),
+		Font = Enum.Font.SourceSans,
+		Text = "Version: 1.234.56",
+		Theme = {TextColor3 = "Tertiary"},
+		TextSize = 14,
+		TextXAlignment = Enum.TextXAlignment.Left
+	})
 
 	local homeButton = tabButtons:object("TextButton", {
 		Name = "hehehe siuuuuuuuuu",
@@ -817,6 +833,7 @@ function Library:create(options)
 		core = core,
 		notifs = notificationHolder,
 		statusText = status,
+		versionText = version,
 		container = content,
 		navigation = tabButtons,
 		Theme = options.Theme,
@@ -838,7 +855,7 @@ function Library:create(options)
 	settingsTab:keybind{
 		Name = "Toggle Key",
 		Description = "Key to show/hide the UI.",
-		Keybind = Enum.KeyCode.RightControl,
+		Keybind = Enum.KeyCode.Delete,
 		Callback = function()
 			self.Toggled = not self.Toggled
 			Library:show(self.Toggled)
@@ -1216,6 +1233,7 @@ function Library:tab(options)
 
 	return setmetatable({
 		statusText = self.statusText,
+		versionText = self.versionText,
 		container = tab,
 		Theme = self.Theme,
 		core = self.core,
