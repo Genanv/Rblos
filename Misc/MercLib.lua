@@ -624,7 +624,7 @@ function Library:create(options)
 	local version = core:object("TextLabel", {
 		AnchorPoint = Vector2.new(0, 1),
 		BackgroundTransparency = 1,
-		Position = UDim2.new(1, 5, 1, -6),
+		Position = UDim2.new(0.5, 5, 1, -6),
 		Size = UDim2.new(0.2, 0, 0, 10),
 		Font = Enum.Font.SourceSans,
 		Text = "Version: 1.234.56",
