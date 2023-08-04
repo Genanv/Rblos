@@ -250,6 +250,7 @@ function espLibrary.addEsp(player)
     if (player == localPlayer) then
         return
     end
+    print(player)
     if player:IsA("Model") and not player:FindFirstChildOfClass("Humanoid") then
         print("failed"..player)
         return
