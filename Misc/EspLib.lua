@@ -235,6 +235,30 @@ function espLibrary.visibleCheck(character, position)
     return (not raycast(workspace, origin, position - origin, params));
 end
 
+function espLibrary:addNpcEsp(npc, defaultOptions)
+    assert(npc, "Invalid NPC object passed");
+
+    local options = defaultOptions or {};
+
+    options.enabled = options.enabled or true;
+    options.limitDistance = options.limitDistance or false;
+    options.maxDistance = options.maxDistance or false;
+    options.visibleOnly = options.visibleOnly or false;
+    options.color = options.color or Color3.new(1, 1, 1);
+    options.transparency = options.transparency or 1;
+    options.text = options.text or npc.Name;
+    options.font = options.font or 2;
+    options.fontSize = options.fontSize or 13;
+
+    self:addObject(npc, options);
+
+    return options;
+end
+
+function espLibrary:removeNpcEsp(npc)
+    self:removeObject(npc);
+end
+
 function espLibrary.addEsp(player)
     if (player == localPlayer) then
         return
