@@ -247,7 +247,7 @@ function espLibrary.visibleCheck(character, position)
 end
 
 function espLibrary.addEsp(player)
-    if (player == localPlayer) then
+    if player == localPlayer or player == nil then
         return
     end
     print(player)
