@@ -1,5 +1,6 @@
 --[[
-    made by siper#9938 and mickey#5612
+    Sirius ESP library EDITED
+    originally made by siper#9938 and mickey#5612
 ]]
 
 -- main module
@@ -151,14 +152,29 @@ end
 
 -- Main Functions
 function espLibrary.getTeam(player)
-    local team = player.Team;
-    return team, player.TeamColor.Color;
+    if player:IsA("Model") then
+        local team = 'Npc';
+        return team, BrickColor.new("Red");
+    elseif player.Team then
+        local team = player.Team;
+        return team, player.TeamColor.Color;
+    end
+end
+function espLibrary.getCharacter(entity)
+    local character, humanoidRootPart
+
+    if entity:IsA("Model") and entity:FindFirstChild("Humanoid") then -- hopefully adds support for NPCs :/
+        character = entity
+        humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+
+    elseif entity:IsA("Player") then
+        character = entity.Character
+        humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+    end
+
+    return character, humanoidRootPart
 end
 
-function espLibrary.getCharacter(player)
-    local character = player.Character;
-    return character, character and findFirstChild(character, "HumanoidRootPart");
-end
 
 function espLibrary.getBoundingBox(character, torso)
     if (espLibrary.options.boundingBox) then
@@ -235,7 +251,12 @@ function espLibrary.visibleCheck(character, position)
 end
 
 function espLibrary.addEsp(player)
-    if (player == localPlayer) then
+    if player == localPlayer or player == nil then
+        return
+    end
+    print(player)
+    if player:IsA("Model") and not player:FindFirstChildOfClass("Humanoid") then
+        print("failed"..player)
         return
     end
 
@@ -288,7 +309,7 @@ function espLibrary.addEsp(player)
         }),
         line = create("Line")
     };
-
+    print("addEsp function: "..player.Name)
     espLibrary.espCache[player] = objects;
 end
 
