@@ -163,7 +163,7 @@ end
 function espLibrary.getCharacter(entity)
     local character, humanoidRootPart
 
-    if entity:IsA("Model") and entity:FindFirstChild("Humanoid") then -- hopefully adds support for NPCs :/
+    if entity:IsA("Model") and entity:FindFirstChildOfClass("Humanoid") then -- hopefully adds support for NPCs :/
         character = entity
         humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
 
@@ -233,6 +233,9 @@ function espLibrary.getHealth(player, character)
     local humanoid = findFirstChild(character, "Humanoid");
 
     if (humanoid) then
+        return humanoid.Health, humanoid.MaxHealth;
+    elseif player:FindFirstChildOfClass("Humanoid") then
+        local humanoid = player:FindFirstChildOfClass("Humanoid")
         return humanoid.Health, humanoid.MaxHealth;
     end
 
