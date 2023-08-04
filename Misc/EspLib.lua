@@ -152,14 +152,13 @@ end
 
 -- Main Functions
 function espLibrary.getTeam(player)
-    if rawget(player, "Team") ~= nil then
-        local team = player.Team;
-        return team, player.TeamColor.Color;
-    else
+    if player:IsA("Model") then
         local team = 'Npc';
         return team, BrickColor.new("Red");
+    elseif player.Team then
+        local team = player.Team;
+        return team, player.TeamColor.Color;
     end
-end
 
 function espLibrary.getCharacter(entity)
     local character, humanoidRootPart
