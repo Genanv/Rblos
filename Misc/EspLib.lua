@@ -152,7 +152,7 @@ end
 
 -- Main Functions
 function espLibrary.getTeam(player)
-    if player.Team then
+    if rawget(player, "Team") ~= nil then
         local team = player.Team;
         return team, player.TeamColor.Color;
     else
