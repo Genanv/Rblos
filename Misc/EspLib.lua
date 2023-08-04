@@ -246,7 +246,7 @@ function espLibrary.visibleCheck(character, position)
     return (not raycast(workspace, origin, position - origin, params));
 end
 
-function espLibrary:addEsp(player)
+function espLibrary.addEsp(player)
     if (player == localPlayer) then
         return
     end
