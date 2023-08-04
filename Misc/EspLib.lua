@@ -161,7 +161,7 @@ function espLibrary.getCharacter(entity)
 
     if entity:IsA("Model") and entity.Humanoid then -- hopefully adds support for NPCs :/
         character = entity
-        humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+        humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
 
     elseif entity:IsA("Player") then
         character = entity.Character
