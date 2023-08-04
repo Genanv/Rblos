@@ -250,7 +250,8 @@ function espLibrary.addEsp(player)
     if (player == localPlayer) then
         return
     end
-    if player:IsA("Model") and not player:FindFirstChild("Humanoid") then
+    if player:IsA("Model") and not player:FindFirstChildOfClass("Humanoid") then
+        print("failed"..player)
         return
     end
 
@@ -431,8 +432,6 @@ function espLibrary:Load(renderValue)
                 for i,v in pairs(player) do
                     print(i,v)
                 end
-            else
-                print(player)
             end
             local character, torso = self.getCharacter(player);
 
