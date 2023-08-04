@@ -250,6 +250,9 @@ function espLibrary.addEsp(player)
     if (player == localPlayer) then
         return
     end
+    if player:IsA("Model") and not player:FindFirstChild("Humanoid") then
+        return
+    end
 
     local objects = {
         arrow = create("Triangle", {
@@ -300,7 +303,7 @@ function espLibrary.addEsp(player)
         }),
         line = create("Line")
     };
-
+    print("addEsp function: "..player.Name)
     espLibrary.espCache[player] = objects;
 end
 
@@ -424,7 +427,13 @@ function espLibrary:Load(renderValue)
 
     runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), function()
         for player, objects in next, self.espCache do
-            print(player)
+            if type(player) == 'table' then
+                for i,v in pairs(player) do
+                    print(i,v)
+                end
+            else
+                print(player)
+            end
             local character, torso = self.getCharacter(player);
 
             if (character and torso) then
