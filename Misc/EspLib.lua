@@ -424,6 +424,7 @@ function espLibrary:Load(renderValue)
 
     runService:BindToRenderStep("esp_rendering", renderValue or (Enum.RenderPriority.Camera.Value + 1), function()
         for player, objects in next, self.espCache do
+            print(player)
             local character, torso = self.getCharacter(player);
 
             if (character and torso) then
