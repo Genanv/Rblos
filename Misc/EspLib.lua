@@ -156,10 +156,22 @@ function espLibrary.getTeam(player)
     return team, player.TeamColor.Color;
 end
 
-function espLibrary.getCharacter(player)
-    local character = player.Character;
-    return character, character and findFirstChild(character, "HumanoidRootPart");
+function espLibrary.getCharacter(entity)
+    local character, humanoidRootPart
+
+    if entity:IsA("Player") then
+        character = entity.Character
+        humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+    else
+        if entity:IsA("Model") and entity.Humanoid then -- hopefully adds support for NPCs :/
+            character = entity
+        end
+        humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+    end
+
+    return character, humanoidRootPart
 end
+
 
 function espLibrary.getBoundingBox(character, torso)
     if (espLibrary.options.boundingBox) then
