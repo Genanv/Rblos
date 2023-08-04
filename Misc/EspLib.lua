@@ -152,8 +152,13 @@ end
 
 -- Main Functions
 function espLibrary.getTeam(player)
-    local team = player.Team;
-    return team, player.TeamColor.Color;
+    if player.Team then
+        local team = player.Team;
+        return team, player.TeamColor.Color;
+    else
+        local team = 'Npc';
+        return team, BrickColor.new("Red");
+    end
 end
 
 function espLibrary.getCharacter(entity)
