@@ -29,7 +29,7 @@ local espLibrary = {
         maxDistance = 1000,
         visibleOnly = false,
         teamCheck = false,
-        teamColor = false,
+        teamColor = true,
         fillColor = nil,
         whitelistColor = Color3.new(1, 0, 0),
         outOfViewArrows = false,
@@ -154,7 +154,7 @@ end
 function espLibrary.getTeam(player)
     if player:IsA("Model") then
         local team = 'Npc';
-        return team, BrickColor.new("Red");
+        return team, Color3.new(1.000000, 0.000000, 0.000000);
     elseif player.Team then
         local team = player.Team;
         return team, player.TeamColor.Color;
