@@ -28,7 +28,7 @@ local espLibrary = {
         limitDistance = false,
         maxDistance = 1000,
         visibleOnly = false,
-        teamCheck = true,
+        teamCheck = false,
         teamColor = true,
         fillColor = nil,
         whitelistColor = Color3.new(1, 0, 0),
@@ -257,7 +257,6 @@ function espLibrary.addEsp(player)
     if player == localPlayer or player == nil then
         return
     end
-    print(player)
     if player:IsA("Model") and not player:FindFirstChildOfClass("Humanoid") then
         print("failed"..player)
         return
@@ -312,7 +311,6 @@ function espLibrary.addEsp(player)
         }),
         line = create("Line")
     };
-    print("addEsp function: "..player.Name)
     espLibrary.espCache[player] = objects;
 end
 
