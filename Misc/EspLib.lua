@@ -439,16 +439,16 @@ function Object:DrawBars(Quad)
     local healthBarHeight = Quad.HealthBarFull.Y-Quad.HealthBarFrom.Y
 
     local HealthBarTo = Vector2.new(
-        Quad.HealthBarFrom.X,
-        Quad.HealthBarFrom.Y + healthBarHeight * (1 - healthRatio)
+        Quad.HealthBarFull.X,
+        Quad.HealthBarFull.Y + healthBarHeight * (1 - healthRatio)
     )
     
     local Properties = {
         Visible = true,
         Color = Color,
         Thickness = Thickness,
-        From = Quad.HealthBarFrom,
-        To = Quad.HealthBarFull;
+        From = Quad.HealthBarFull,
+        To = HealthBarTo,
     }
     
     for Property, Value in next, Properties do
