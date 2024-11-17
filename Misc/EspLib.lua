@@ -447,7 +447,7 @@ function Object:DrawBars(Quad)
         Visible = true,
         Color = Color,
         Thickness = Thickness,
-        From = Quad.HealthBarFull,
+        From = Quad.HealthBarFrom,
         To = HealthBarTo,
     }
     
