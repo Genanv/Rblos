@@ -185,7 +185,6 @@ end
 local function GetValue(Local, Global, Name) -- Blame the bird. Easy way to check if a setting is enabled on either the object settings or global settings.
     local GlobalVal = Global[Name]
     local LocalVal = Local[Name]
-    print(Local, Global)  -- Add this before calling GetValue to see if either is nil.
 
     return LocalVal or ((LocalVal == nil or typeof(LocalVal) ~= "boolean") and GlobalVal)
 end
@@ -435,7 +434,7 @@ function Object:DrawBars(Quad)
         Visible = true,
         Color = Color,
         Thickness = Thickness,
-        From = Quad.HealthBarFrom,
+        From = workspace.CurrentCamera.ViewportSize * Vector2.new(.5, 1),
         To = Quad.BoxBottom,
     }
     
