@@ -14,6 +14,7 @@ local ESP = {
         TeamColors = false, -- Whether or not the ESP color is based on team colors.
         TeamBased = false, -- Whether or not the ESP should render ESP on teammates. 
         BoxTopOffset = Vector3.new(0, 1, 0), -- Offset for where the top of the box should be
+        HealthBarOffset = Vector3.new(-0.5,0, 0),
         
         Boxes = {
             Enabled = true,
@@ -293,6 +294,7 @@ function Object:GetQuad() -- Gets a table of positions for use in pretty much ev
     
     local MaxSize = GetValue(RenderSettings, GlobalSettings, "MaxBoxSize")
     local BoxTopOffset = GetValue(RenderSettings, GlobalSettings, "BoxTopOffset")
+    local HealthbarOffset = GetValue(RenderSettings, GlobalSettings, "HealthBarOffset")
     
     local Model = self.Model
     local Pivot = Model:GetPivot()
@@ -313,7 +315,7 @@ function Object:GetQuad() -- Gets a table of positions for use in pretty much ev
     local TopLeft, TopLeftOnScreen = ESP:GetScreenPosition((Pivot * CFrame.new(X, Y, 0)).Position)--[[Pivot + (Size / 2))]]
     local BottomLeft, BottomLeftOnScreen = ESP:GetScreenPosition((Pivot * CFrame.new(X, -Y, 0)).Position) --[[+ ((Size * Vector3.new(1, -1, 0)) / 2))]]
     local BottomRight, BottomRightOnScreen = ESP:GetScreenPosition((Pivot * CFrame.new(-X, -Y, 0)).Position)--[[ - (Size / 2))]]
-    local HealthBarFrom = ESP:GetScreenPosition((Pivot * CFrame.new(0, -Y, 0)).Position) - Vector2.new(5, 0)
+    local HealthBarFrom = ESP:GetScreenPosition((Pivot * CFrame.new(0, -Y, 0)).Position + (HealthbarOffset))
     
     if TopRightOnScreen or TopLeftOnScreen or BottomLeftOnScreen or BottomRightOnScreen then -- Boxes don't cause weird drawing issues if any part of the character is on-screen (only checks the bounding box, a player's arm can be slightly poking out and the box won't draw).
         local Positions = {
