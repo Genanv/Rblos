@@ -20,6 +20,11 @@ local ESP = {
             Color = Color3.new(1, 0, 1),
             Thickness = 1,
         },
+        Bars = {
+            Enabled = true,
+            Color = Color3.new(1, 0, 0),
+            Thickness = 1,
+        },
         Names = {
             Distance = true,
             Health = true, -- Adds health values to the nametag.
