@@ -195,6 +195,7 @@ function Object:New(Model, ExtraInfo) -- Object:New(Target, {Name = "Custom Name
         Connections = {},
         RenderSettings = {
             Boxes = {},
+            Bars = {},
             Tracers = {},
             Names = {},
         },
@@ -204,6 +205,11 @@ function Object:New(Model, ExtraInfo) -- Object:New(Target, {Name = "Custom Name
         
         Objects = {
             Box = {
+                Color = Settings.Boxes.Color,
+                Thickness = Settings.Boxes.Thickness,
+            },
+            
+            Bars = {
                 Color = Settings.Boxes.Color,
                 Thickness = Settings.Boxes.Thickness,
             },
@@ -241,6 +247,7 @@ function Object:New(Model, ExtraInfo) -- Object:New(Target, {Name = "Custom Name
     ESP.Objects[Model] = NewObject
 
     NewObject.Objects.Box = Draw("Quad", NewObject.Objects.Box)
+    NewObject.Objects.Bars = Draw("Line", NewObject.Objects.Box)
     NewObject.Objects.Name = Draw("Text", NewObject.Objects.Name)
     NewObject.Objects.Tracer = Draw("Line", NewObject.Objects.Tracer)
     
@@ -299,6 +306,7 @@ function Object:GetQuad() -- Gets a table of positions for use in pretty much ev
     local TopLeft, TopLeftOnScreen = ESP:GetScreenPosition((Pivot * CFrame.new(X, Y, 0)).Position)--[[Pivot + (Size / 2))]]
     local BottomLeft, BottomLeftOnScreen = ESP:GetScreenPosition((Pivot * CFrame.new(X, -Y, 0)).Position) --[[+ ((Size * Vector3.new(1, -1, 0)) / 2))]]
     local BottomRight, BottomRightOnScreen = ESP:GetScreenPosition((Pivot * CFrame.new(-X, -Y, 0)).Position)--[[ - (Size / 2))]]
+    local HealthBarFrom = Vector2.new(BoxPosition.X - 5, BoxPosition.Y + BoxSize.Y)
     
     if TopRightOnScreen or TopLeftOnScreen or BottomLeftOnScreen or BottomRightOnScreen then -- Boxes don't cause weird drawing issues if any part of the character is on-screen (only checks the bounding box, a player's arm can be slightly poking out and the box won't draw).
         local Positions = {
@@ -309,6 +317,7 @@ function Object:GetQuad() -- Gets a table of positions for use in pretty much ev
             TopLeft = TopLeft,     -- Top Left
             BottomLeft = BottomLeft,  -- Bottom Left
             BottomRight = BottomRight, -- Bottom Right
+            HealthBarFrom = HealthBarFrom,
         }
     
         return Positions, true -- The player is on the screen, so the box can be drawn.
@@ -406,6 +415,29 @@ function Object:DrawTracer(Quad)
     end
 end
 
+function Object:DrawBars(Quad)
+    local RenderSettings = self.RenderSettings
+    local GlobalSettings = self.GlobalSettings
+    
+    local RenderBars = RenderSettings.Bars
+    local GlobalBars = GlobalSettings.Bars
+    
+    local Color = GetValue(RenderBars, GlobalBars, "Color")
+    local Thickness = GetValue(RenderBars, GlobalBars, "Thickness")
+    
+    local Properties = {
+        Visible = true,
+        Color = Color,
+        Thickness = Thickness,
+        From = Quad.HealthBarFrom,
+        To = Quad.BoxBottom,
+    }
+    
+    for Property, Value in next, Properties do
+        self.Objects.Tracer[Property] = Value
+    end
+end
+
 function Object:Destroy()
     ESP.Objects[self.Model] = nil
     self:ClearDrawings()
@@ -436,6 +468,7 @@ function Object:Refresh()
     local TeamBased = GetValue(RenderSettings, GlobalSettings, "TeamBased")
     local MaxDistance = GetValue(RenderSettings, GlobalSettings, "MaxDistance")
     local Boxes = GetValue(RenderSettings.Boxes, GlobalSettings.Boxes, "Enabled")
+    local Bars = GetValue(RenderSettings.Bar, GlobalSettings.Bars, "Enabled")
     local Names = GetValue(RenderSettings.Names, GlobalSettings.Names, "Enabled")
     local Tracers = GetValue(RenderSettings.Tracers, GlobalSettings.Tracers, "Enabled")
     
@@ -463,6 +496,12 @@ function Object:Refresh()
         self:DrawBox(Quad)
     else
         self.Objects.Box.Visible = false
+    end
+
+    if Bars then
+        self:DrawBar(Quad)
+    else
+        self.Objects.Bar.Visible = false
     end
     
     if Names then
