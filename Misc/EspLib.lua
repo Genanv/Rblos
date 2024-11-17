@@ -504,7 +504,7 @@ function Object:Refresh()
     end
 
     if Bars then
-        self:DrawBar(Quad)
+        self:DrawBars(Quad)
     else
         self.Objects.Bar.Visible = false
     end
