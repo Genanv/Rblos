@@ -473,7 +473,7 @@ function Object:Refresh()
     local TeamBased = GetValue(RenderSettings, GlobalSettings, "TeamBased")
     local MaxDistance = GetValue(RenderSettings, GlobalSettings, "MaxDistance")
     local Boxes = GetValue(RenderSettings.Boxes, GlobalSettings.Boxes, "Enabled")
-    local Bars = GetValue(RenderSettings.Bar, GlobalSettings.Bars, "Enabled")
+    local Bars = GetValue(RenderSettings.Bars, GlobalSettings.Bars, "Enabled")
     local Names = GetValue(RenderSettings.Names, GlobalSettings.Names, "Enabled")
     local Tracers = GetValue(RenderSettings.Tracers, GlobalSettings.Tracers, "Enabled")
     
