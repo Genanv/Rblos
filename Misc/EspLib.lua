@@ -326,6 +326,7 @@ function Object:GetQuad() -- Gets a table of positions for use in pretty much ev
             BottomLeft = BottomLeft,  -- Bottom Left
             BottomRight = BottomRight, -- Bottom Right
             HealthBarFrom = HealthBarFrom,
+            HealthBarFull = HealthBarFull,
         }
     
         return Positions, true -- The player is on the screen, so the box can be drawn.
@@ -437,10 +438,9 @@ function Object:DrawBars(Quad)
     local healthRatio = health/maxHealth
     local healthBarHeight = Quad.HealthBarFull.Y-Quad.HealthBarFrom.Y
 
-    local HealthBarTo = Vector3.new(
-        0,
-        Quad.HealthBarFrom.Y + healthBarHeight * (1 - healthRatio),
-        Quad.HealthBarFrom.X
+    local HealthBarTo = Vector2.new(
+        Quad.HealthBarFrom.X,
+        Quad.HealthBarFrom.Y + healthBarHeight * (1 - healthRatio)
     )
     
     local Properties = {
