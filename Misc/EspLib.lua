@@ -252,7 +252,7 @@ function Object:New(Model, ExtraInfo) -- Object:New(Target, {Name = "Custom Name
     ESP.Objects[Model] = NewObject
 
     NewObject.Objects.Box = Draw("Quad", NewObject.Objects.Box)
-    NewObject.Objects.Bars = Draw("Line", NewObject.Objects.Box)
+    NewObject.Objects.Bars = Draw("Line", NewObject.Objects.Bars)
     NewObject.Objects.Name = Draw("Text", NewObject.Objects.Name)
     NewObject.Objects.Tracer = Draw("Line", NewObject.Objects.Tracer)
     
