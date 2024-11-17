@@ -19,6 +19,7 @@ local ESP = {
             Enabled = true,
             Color = Color3.new(1, 0, 1),
             Thickness = 1,
+            Transparency = 0.5,
         },
         Bars = {
             Enabled = true,
@@ -212,6 +213,7 @@ function Object:New(Model, ExtraInfo) -- Object:New(Target, {Name = "Custom Name
             Box = {
                 Color = Settings.Boxes.Color,
                 Thickness = Settings.Boxes.Thickness,
+                Transparency = Settings.Boxes.Transparency,
             },
             
             Bars = {
@@ -341,11 +343,13 @@ function Object:DrawBox(Quad) -- Draws a box around the player based on a given 
     local TeamColors = GetValue(RenderSettings, GlobalSettings, "TeamColors")
     local Thickness = GetValue(RenderBoxes, GlobalBoxes, "Thickness")
     local Color = GetValue(RenderBoxes, GlobalBoxes, "Color")
+    local Transparency = GetValue(RenderBoxes, GlobalBoxes, "Transparency")
 
     local Properties = {
         Visible = true,
         Color = TeamColors and ESP:GetTeamColor(self.Model) or Color,
         Thickness = Thickness,
+        Transparency = Transparency,
         PointA = Quad.TopRight,
         PointB = Quad.TopLeft,
         PointC = Quad.BottomLeft,
@@ -434,8 +438,8 @@ function Object:DrawBars(Quad)
         Visible = true,
         Color = Color,
         Thickness = Thickness,
-        From = workspace.CurrentCamera.ViewportSize * Vector2.new(.5, 1),
-        To = Quad.BoxBottom,
+        From = workspace.CurrentCamera.ViewportSize * Vector2.new(.5, 1), -- screen bot
+        To = Quad.HealthBarFrom;
     }
     
     for Property, Value in next, Properties do
