@@ -292,7 +292,7 @@ function Object:GetQuad() -- Gets a table of positions for use in pretty much ev
     
     local MaxSize = GetValue(RenderSettings, GlobalSettings, "MaxBoxSize")
     local BoxTopOffset = GetValue(RenderSettings, GlobalSettings, "BoxTopOffset")
-    local HealthbarOffset = -5
+    local HealthbarOffset = -3
     
     local Model = self.Model
     local Pivot = Model:GetPivot()
