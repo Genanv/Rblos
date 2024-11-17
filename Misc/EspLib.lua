@@ -292,7 +292,7 @@ function Object:GetQuad() -- Gets a table of positions for use in pretty much ev
     
     local MaxSize = GetValue(RenderSettings, GlobalSettings, "MaxBoxSize")
     local BoxTopOffset = GetValue(RenderSettings, GlobalSettings, "BoxTopOffset")
-    local HealthbarOffset = Vector3.new(0,0, 3)
+    local HealthbarOffset = Vector3.new(0,0,2)
     
     local Model = self.Model
     local Pivot = Model:GetPivot()
@@ -314,7 +314,7 @@ function Object:GetQuad() -- Gets a table of positions for use in pretty much ev
     local BottomLeft, BottomLeftOnScreen = ESP:GetScreenPosition((Pivot * CFrame.new(X, -Y, 0)).Position) --[[+ ((Size * Vector3.new(1, -1, 0)) / 2))]]
     local BottomRight, BottomRightOnScreen = ESP:GetScreenPosition((Pivot * CFrame.new(-X, -Y, 0)).Position)--[[ - (Size / 2))]]
     local HealthBarFrom = ESP:GetScreenPosition((Pivot * CFrame.new(0, -Y, 0)).Position + (HealthbarOffset))
-    local HealthBarFull = ESP:GetScreenPosition((Pivot * CFrame.new(0, Y, 0)).Position + (BoxTopOffset) + (HealthbarOffset))
+    local HealthBarFull = ESP:GetScreenPosition((Pivot * CFrame.new(0, Y, 0)).Position + (HealthbarOffset))
     
     if TopRightOnScreen or TopLeftOnScreen or BottomLeftOnScreen or BottomRightOnScreen then -- Boxes don't cause weird drawing issues if any part of the character is on-screen (only checks the bounding box, a player's arm can be slightly poking out and the box won't draw).
         local Positions = {
@@ -448,7 +448,7 @@ function Object:DrawBars(Quad)
         Color = Color,
         Thickness = Thickness,
         From = Quad.HealthBarFrom,
-        To = HealthBarTo;
+        To = Quad.HealthBarFull;
     }
     
     for Property, Value in next, Properties do
