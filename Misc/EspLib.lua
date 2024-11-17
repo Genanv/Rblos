@@ -448,7 +448,7 @@ function Object:DrawBars(Quad)
         Color = Color,
         Thickness = Thickness,
         From = Quad.HealthBarFrom,
-        To = HealthBarTo,
+        To = Quad.HealthBarFull,
     }
     
     for Property, Value in next, Properties do
