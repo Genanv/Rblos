@@ -439,7 +439,7 @@ function Object:DrawBars(Quad)
     }
     
     for Property, Value in next, Properties do
-        self.Objects.Tracer[Property] = Value
+        self.Objects.Bars[Property] = Value
     end
 end
 
