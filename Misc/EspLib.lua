@@ -434,21 +434,21 @@ function Object:DrawBars(Quad)
     local Color = GetValue(RenderBars, GlobalBars, "Color")
     local Thickness = GetValue(RenderBars, GlobalBars, "Thickness")
 
-    local health,maxHealth = ESP:GetHealth(self.Model)
-    local healthRatio = health/maxHealth
-    local healthBarHeight = Quad.HealthBarFull.Y-Quad.HealthBarFrom.Y
+    local health, maxHealth = ESP:GetHealth(self.Model)
+    local healthRatio = health / maxHealth
+    local healthBarHeight = Quad.HealthBarFull.Y - Quad.HealthBarFrom.Y
 
     local HealthBarTo = Vector2.new(
         Quad.HealthBarFull.X,
-        Quad.HealthBarFrom.Y + healthBarHeight * (1 - healthRatio)
+        Quad.HealthBarFull.Y + healthBarHeight * (1 - healthRatio)
     )
-    
+
     local Properties = {
         Visible = true,
         Color = Color,
         Thickness = Thickness,
-        From = Quad.HealthBarFrom,
-        To = Quad.HealthBarFull,
+        From = Quad.HealthBarFull,
+        To = HealthBarTo,
     }
     
     for Property, Value in next, Properties do
