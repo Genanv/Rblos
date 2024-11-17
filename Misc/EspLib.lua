@@ -14,7 +14,6 @@ local ESP = {
         TeamColors = false, -- Whether or not the ESP color is based on team colors.
         TeamBased = false, -- Whether or not the ESP should render ESP on teammates. 
         BoxTopOffset = Vector3.new(0, 1, 0), -- Offset for where the top of the box should be
-        HealthBarOffset = Vector3.new(-0.5,0, 0),
         
         Boxes = {
             Enabled = true,
@@ -214,7 +213,6 @@ function Object:New(Model, ExtraInfo) -- Object:New(Target, {Name = "Custom Name
             Box = {
                 Color = Settings.Boxes.Color,
                 Thickness = Settings.Boxes.Thickness,
-                Transparency = Settings.Boxes.Transparency,
             },
             
             Bars = {
@@ -294,7 +292,7 @@ function Object:GetQuad() -- Gets a table of positions for use in pretty much ev
     
     local MaxSize = GetValue(RenderSettings, GlobalSettings, "MaxBoxSize")
     local BoxTopOffset = GetValue(RenderSettings, GlobalSettings, "BoxTopOffset")
-    local HealthbarOffset = GetValue(RenderSettings, GlobalSettings, "HealthBarOffset")
+    local HealthbarOffset = Vector3.new(0,0, 1)
     
     local Model = self.Model
     local Pivot = Model:GetPivot()
@@ -345,13 +343,11 @@ function Object:DrawBox(Quad) -- Draws a box around the player based on a given 
     local TeamColors = GetValue(RenderSettings, GlobalSettings, "TeamColors")
     local Thickness = GetValue(RenderBoxes, GlobalBoxes, "Thickness")
     local Color = GetValue(RenderBoxes, GlobalBoxes, "Color")
-    local Transparency = GetValue(RenderBoxes, GlobalBoxes, "Transparency")
 
     local Properties = {
         Visible = true,
         Color = TeamColors and ESP:GetTeamColor(self.Model) or Color,
         Thickness = Thickness,
-        Transparency = Transparency,
         PointA = Quad.TopRight,
         PointB = Quad.TopLeft,
         PointC = Quad.BottomLeft,
