@@ -185,7 +185,8 @@ end
 local function GetValue(Local, Global, Name) -- Blame the bird. Easy way to check if a setting is enabled on either the object settings or global settings.
     local GlobalVal = Global[Name]
     local LocalVal = Local[Name]
-    
+    print(Local, Global)  -- Add this before calling GetValue to see if either is nil.
+
     return LocalVal or ((LocalVal == nil or typeof(LocalVal) ~= "boolean") and GlobalVal)
 end
 
@@ -215,8 +216,8 @@ function Object:New(Model, ExtraInfo) -- Object:New(Target, {Name = "Custom Name
             },
             
             Bars = {
-                Color = Settings.Boxes.Color,
-                Thickness = Settings.Boxes.Thickness,
+                Color = Settings.Bars.Color,
+                Thickness = Settings.Bars.Thickness,
             },
         
             Name = {
